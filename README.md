@@ -33,7 +33,7 @@ And corresponding output will be
 
 ```python
 # import package
-from sudoku9.sudoku import Sudoku
+from sudoku9 import Sudoku
 # input board
 board = ["53..7....","6..195...",".98....6.","8...6...3","4..8.3..1","7...2...6",".6....28.","...419..5","....8..79"]
 
