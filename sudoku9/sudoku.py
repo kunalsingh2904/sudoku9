@@ -1,7 +1,7 @@
 class Sudoku:
     # @param A : list of list of chars
     # @return nothing
-    def __init__(self,board):
+    def __init__(self, board):
         '''
         Input: 2d list --> input board to solve
         '''
@@ -29,9 +29,9 @@ class Sudoku:
         return out
 
     # check validation of input board
-    def IsValidInput(self,A):
+    def IsValidInput(self, A):
         # Determine if a Sudoku is valid
-        for i in range(9):      #ROW
+        for i in range(9):  # ROW
             s = set()
             for j in range(9):
                 if A[i][j] != ".":
@@ -39,7 +39,7 @@ class Sudoku:
                         return False
                     else:
                         s.add(A[i][j])
-        for i in range(9):      #COL
+        for i in range(9):  # COL
             s = set()
             for j in range(9):
                 if A[j][i] != ".":
@@ -66,14 +66,14 @@ class Sudoku:
         return True
 
     def __solvesudoku(self):
-        empty = [-1,-1]
+        empty = [-1, -1]
         # When no empty positions left then we have our complete sudoku
         if not self.__find_empty_location(empty):
             return True
-        
-        r,c = empty[0],empty[1]
-        
-        for num in range(1,10):
+
+        r, c = empty[0], empty[1]
+
+        for num in range(1, 10):
             # chekc if our choice of placing num at certain r,c is valid or not
             # print(num)
             if self.__isvalid(num, r, c):
@@ -83,8 +83,8 @@ class Sudoku:
                     return True
                 # if the taken choice did not yield any solution then backtrack
                 self.__board[r][c] = '.'
-             
-    # function to find empty cell in board   
+
+    # function to find empty cell in board
     def __find_empty_location(self, empty):
         for i in range(9):
             for j in range(9):
@@ -93,32 +93,29 @@ class Sudoku:
                     empty[1] = j
                     return True
         return False
-    
-    # function to check if we can successfully place a number on a particular cell 
+
+    # function to check if we can successfully place a number on a particular cell
     def __isvalid(self, num, r, c):
-        # checking if num exists in the corresponding column 
+        # checking if num exists in the corresponding column
         for i in range(9):
             if self.__board[i][c] == str(num):
                 return False
-        #checking if num exists in the coresponding row    
+        # checking if num exists in the coresponding row
         for j in range(9):
             if self.__board[r][j] == str(num):
                 return False
-        # checking if the number exists in that particular 3X3 block of sudoku 
-        r = r-r%3
-        c = c-c%3
-        for i in range(3): 
-            for j in range(3): 
-                if self.__board[i+r][j+c] == str(num): 
+        # checking if the number exists in that particular 3X3 block of sudoku
+        r = r-r % 3
+        c = c-c % 3
+        for i in range(3):
+            for j in range(3):
+                if self.__board[i+r][j+c] == str(num):
                     return False
         return True
 
 
-# if __name__ == '__main__':
-#     board = ["53..7....","6..195...",".98....6.","8...6...3","4..8.3..1","7...2...6",".6....28.","...419..5","....8..79"]
-#     puzzle = Sudoku(board)
-#     print(puzzle.solveSudoku())
-
-
-        
-        
+if __name__ == '__main__':
+    board = ["53..7....", "6..195...", ".98....6.", "8...6...3",
+             "4..8.3..1", "7...2...6", ".6....28.", "...419..5", "....8..79"]
+    puzzle = Sudoku(board)
+    print(puzzle.solveSudoku())
